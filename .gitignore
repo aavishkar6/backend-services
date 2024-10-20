@@ -1,0 +1,70 @@
+# Python specific
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# VS Code and other editors
+.vscode/
+.idea/
+*.swp
+
+# Logs and database
+*.log
+*.db
+*.sqlite3
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+coverage/
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pyre/
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.test
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# FastAPI specific (if using Alembic for migrations)
+migrations/
+
+# Docker
+*.stackdump
+docker-compose.override.yml
+.dockerignore
+Dockerfile
+
+# MacOS specific files
+.DS_Store
