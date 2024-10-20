@@ -6,10 +6,11 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 # Import routers
-from blog.routers import router as blog_router
-from docChat.routers import router as docChat_router
-from personalWebsite.routers import router as personalWebsite_router
-from portalpeek.routers import router as portalpeek_router
+from .blog.routers import router as blog_router
+from .docChat.routers import router as docChat_router
+from .personalWebsite.routers import router as personalWebsite_router
+from .portalpeek.routers import router as portalpeek_router
+
 app = FastAPI()
 
 # # Define allowed origins
