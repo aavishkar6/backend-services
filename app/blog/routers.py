@@ -5,10 +5,10 @@ from datetime import datetime, timedelta
 from jose import JWTError, jwt
 
 # Import functionalities from modules.
-from .schemas import Token
-from .utils import create_access_token, verify_password, get_password_hash
+from .schemas import Token, BlogContent
+from .utils import create_access_token, generate_blog_code
 from .config import Config
-from .dependencies import authenticate_user
+from .dependencies import authenticate_user, add_blog_to_db, get_blog_informations
 
 router = APIRouter()
 
@@ -26,7 +26,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     
     user = authenticate_user(form_data.username, form_data.password)
 
-    print("User is ", user)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -57,12 +56,42 @@ async def read_users_me(token: str = Depends(oauth2_scheme)):
         )
     return {"username": username}
 
-# Endpoint to get the titles of all the blogs
+# Endpoint to get the data of all the blogs to display in the homePage.
 @router.get("/blogs/title")
 async def get_blog_titles():
+    
+    blog_information = get_blog_informations()
+
+    return {"blogs_info" : blog_information}
+
     pass
 
 # Endpoint to get the blog data of a specific blog
 @router.get("/blogs/{blog_id}")
 async def get_blog(blog_id: int):
     return {"data": blog_id}
+
+# Endpoint to post blog data.
+@router.post("/add")
+async def add_blog(blog_data: BlogContent):
+    print("received blog data ", blog_data)
+
+    # get DB
+    try:
+        # generate URL-friendly blog code.
+        blog_code = generate_blog_code(blog_data.title)
+
+        print("generate blog code ", blog_code)
+
+        result = add_blog_to_db(blog_data, blog_code)
+
+    except HTTPException as e:
+        raise HTTPException()
+    
+    # save the blogcontent into the db.
+
+    # Get the result.
+
+
+
+

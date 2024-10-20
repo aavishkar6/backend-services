@@ -10,3 +10,13 @@ class Token(BaseModel):
   token_type: str
 
 
+# Define model for Blog Content
+class BlogContent(BaseModel):
+  title: str
+  published_on: str
+  category: str
+  content: str
+
+class BlogData(BlogContent):
+  url: str
+

@@ -4,6 +4,8 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from jose import jwt
+import re
+import unicodedata
 
 # Import modules
 from .config import Config
@@ -29,3 +31,12 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, Config.SECRET_KEY, algorithm=Config.ALGORITHM)
     return encoded_jwt
+
+# create URL-friendly URL
+def generate_blog_code(value: str) -> str:
+    """Convert blog title to a URL-friendly slug."""
+      
+    value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
+    value = re.sub(r'[^\w\s-]', '', value).strip().lower()
+    value = re.sub(r'[-\s]+', '-', value)
+    return value
