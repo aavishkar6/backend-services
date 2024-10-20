@@ -12,19 +12,19 @@ from personalWebsite.routers import router as personalWebsite_router
 from portalpeek.routers import router as portalpeek_router
 app = FastAPI()
 
-# Define allowed origins
-allowed_origins = [
-    "http://localhost:3000",  # Example: your frontend URL
-    "https://your-frontend-domain.com",  # Add any other allowed domains
-]
+# # Define allowed origins
+# allowed_origins = [
+#     "http://localhost:3000",  # Example: your frontend URL
+#     "https://your-frontend-domain.com",  # Add any other allowed domains
+# ]
 
-# Add CORS middleware
+# Add CORS middleware to allow all domains
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,  # Allows specific origins
+    allow_origins=["*"],  # Allow all origins
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allow all headers
 )
 
 
