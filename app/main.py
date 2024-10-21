@@ -29,22 +29,22 @@ app.add_middleware(
 )
 
 
-# Define the database URL (modify with your actual credentials)
-DATABASE_URL = "postgresql://postgres:Relative6#@localhost/test"
+# # Define the database URL (modify with your actual credentials)
+# DATABASE_URL = "postgresql://postgres:Relative6#@localhost/test"
 
-# Create an engine
-engine = create_engine(DATABASE_URL)
+# # Create an engine
+# engine = create_engine(DATABASE_URL)
 
-# Create a configured "Session" class
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# # Create a configured "Session" class
+# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Dependency for getting a session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# # Dependency for getting a session
+# def get_db():
+#     db = SessionLocal()
+#     try:
+#         yield db
+#     finally:
+#         db.close()
 
 
 # Include project-specific routers
@@ -56,15 +56,15 @@ app.include_router(portalpeek_router, prefix="/api/portalpeek")
 # Create database tables
 # Base.metadata.create_all(bind=engine)
 
-# Test route to check the database connection
-@app.get("/test")
-def test_db_connection(db: Session = Depends(get_db)):
-    try:
-        # Perform a simple query to test the connection
-        result = db.execute(text("SELECT 1")).fetchone()
-        return {"status": "success", "result": result[0]}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database connection failed: {e}")
+# # Test route to check the database connection
+# @app.get("/test")
+# def test_db_connection(db: Session = Depends(get_db)):
+#     try:
+#         # Perform a simple query to test the connection
+#         result = db.execute(text("SELECT 1")).fetchone()
+#         return {"status": "success", "result": result[0]}
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Database connection failed: {e}")
 
 @app.get("/")
 def read_root():
