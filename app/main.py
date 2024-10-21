@@ -6,10 +6,10 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 # Import routers
-from .blog.routers import router as blog_router
-from .docChat.routers import router as docChat_router
-from .personalWebsite.routers import router as personalWebsite_router
-from .portalpeek.routers import router as portalpeek_router
+from blog.routers import router as blog_router
+# from docChat.routers import router as docChat_router
+# from personalWebsite.routers import router as personalWebsite_router
+# from portalpeek.routers import router as portalpeek_router
 
 app = FastAPI()
 
@@ -49,9 +49,9 @@ app.add_middleware(
 
 # Include project-specific routers
 app.include_router(blog_router, prefix="/api/blog")
-app.include_router(docChat_router, prefix="/api/documentchat")
-app.include_router(personalWebsite_router, prefix="/api/personal")
-app.include_router(portalpeek_router, prefix="/api/portalpeek")
+# app.include_router(docChat_router, prefix="/api/documentchat")
+# app.include_router(personalWebsite_router, prefix="/api/personal")
+# app.include_router(portalpeek_router, prefix="/api/portalpeek")
 
 # Create database tables
 # Base.metadata.create_all(bind=engine)
