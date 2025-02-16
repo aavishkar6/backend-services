@@ -2,6 +2,7 @@ from dependencies import get_splitter, get_vector_store
 from langchain_community.document_loaders import PyPDFLoader
 import asyncio
 
+
 async def load_document_async(path: str):
     loader = PyPDFLoader(path)
     pages = []
